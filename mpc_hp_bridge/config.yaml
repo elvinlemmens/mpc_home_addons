@@ -1,0 +1,34 @@
+name: "MPC HP Bridge"
+description: "Bridges P1P2MQTT Daikin heat pump data to InfluxDB for the MPC system"
+version: "2.0.0"
+slug: "mpc_hp_bridge"
+init: false
+
+arch:
+  - aarch64
+  - amd64
+  - armv7
+
+homeassistant_api: false
+hassio_api: false
+host_network: false
+
+# This add-on lives in a PUBLIC manifest repo; the application code is pulled at
+# container start from the PRIVATE code repo (GITHUB_REPO) using GITHUB_TOKEN.
+# Blank host defaults fall back to the values in the private repo's config.py.
+options:
+  GITHUB_REPO: "elvinlemmens/mpc_home"
+  GIT_REF: "v0.1.0"
+  GITHUB_TOKEN: ""
+  INFLUX_TOKEN: ""
+  MQTT_HOST: ""
+  MQTT_USER: ""
+  MQTT_PASSWORD: ""
+schema:
+  GITHUB_REPO: str
+  GIT_REF: str
+  GITHUB_TOKEN: password
+  INFLUX_TOKEN: password
+  MQTT_HOST: str
+  MQTT_USER: str
+  MQTT_PASSWORD: password
