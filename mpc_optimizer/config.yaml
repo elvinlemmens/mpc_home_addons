@@ -1,6 +1,6 @@
 name: "MPC Optimizer + Dashboard"
 description: "Runs the joint MPC optimizer (15-min loop) and the web dashboard"
-version: "2.1.0"
+version: "2.2.0"
 slug: "mpc_optimizer"
 init: false
 
@@ -39,6 +39,7 @@ options:
   LOXONE_PASSWORD: ""
   SOLAREDGE_API_KEY: ""
   HP_LIVE_SOURCE: "auto"
+  INTENT_TOKEN: ""
 schema:
   GITHUB_REPO: str
   GIT_REF: str
@@ -53,3 +54,5 @@ schema:
   SOLAREDGE_API_KEY: "password?"
   # auto = shared files from the HP bridge when its heartbeat is fresh, else own MQTT
   HP_LIVE_SOURCE: "list(auto|shared|mqtt)?"
+  # optional shared secret Loxone passes as ?token=... on /api/intent calls
+  INTENT_TOKEN: "password?"
