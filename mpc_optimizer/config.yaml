@@ -1,6 +1,6 @@
 name: "MPC Optimizer + Dashboard"
 description: "Runs the joint MPC optimizer (15-min loop) and the web dashboard"
-version: "2.0.0"
+version: "2.1.0"
 slug: "mpc_optimizer"
 init: false
 
@@ -12,6 +12,11 @@ arch:
 homeassistant_api: false
 hassio_api: false
 host_network: false
+
+# /share is mounted so the HP bridge can hand live heat-pump readings to the
+# optimizer without a second MQTT subscription (reads the shared live store, /share/mpc/live).
+map:
+  - share:ro
 
 # Expose the dashboard. Reach it at http://<ha-ip>:8080
 ports:
@@ -33,6 +38,7 @@ options:
   LOXONE_USER: ""
   LOXONE_PASSWORD: ""
   SOLAREDGE_API_KEY: ""
+  HP_LIVE_SOURCE: "auto"
 schema:
   GITHUB_REPO: str
   GIT_REF: str
@@ -45,3 +51,5 @@ schema:
   LOXONE_USER: str
   LOXONE_PASSWORD: password
   SOLAREDGE_API_KEY: "password?"
+  # auto = shared files from the HP bridge when its heartbeat is fresh, else own MQTT
+  HP_LIVE_SOURCE: "list(auto|shared|mqtt)?"

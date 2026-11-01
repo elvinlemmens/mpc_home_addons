@@ -1,6 +1,6 @@
 name: "MPC HP Bridge"
 description: "Bridges P1P2MQTT Daikin heat pump data to InfluxDB for the MPC system"
-version: "2.0.0"
+version: "2.1.0"
 slug: "mpc_hp_bridge"
 init: false
 
@@ -12,6 +12,11 @@ arch:
 homeassistant_api: false
 hassio_api: false
 host_network: false
+
+# /share is mounted so the HP bridge can hand live heat-pump readings to the
+# optimizer without a second MQTT subscription (writes the shared live store, /share/mpc/live).
+map:
+  - share:rw
 
 # This add-on lives in a PUBLIC manifest repo; the application code is pulled at
 # container start from the PRIVATE code repo (GITHUB_REPO) using GITHUB_TOKEN.
