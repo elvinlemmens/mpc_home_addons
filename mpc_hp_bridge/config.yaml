@@ -1,6 +1,6 @@
 name: "MPC HP Bridge"
 description: "Bridges P1P2MQTT Daikin heat pump data to InfluxDB for the MPC system"
-version: "2.1.0"
+version: "2.2.0"
 slug: "mpc_hp_bridge"
 init: false
 

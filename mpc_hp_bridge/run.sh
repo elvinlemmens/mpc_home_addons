@@ -34,6 +34,18 @@ fi
 cd "$APP" || exit 1
 export PYTHONPATH="$APP"
 
+# ── dependencies: install whatever the fetched code needs and the image lacks ─
+# The code is pulled at start, but libraries are baked into the image at build
+# time, so a new dependency used to fail with "No module named ..." until the
+# add-on image was rebuilt. pip only installs what is missing (a few seconds
+# when everything is present). A failure (offline, build error) is logged and
+# the add-on starts anyway with what it has.
+if [ -f "$APP/requirements-bridge.txt" ]; then
+  echo "[bootstrap] checking python dependencies (requirements-bridge.txt)"
+  pip install --no-cache-dir --disable-pip-version-check -q -r "$APP/requirements-bridge.txt" \
+    || echo "[bootstrap] WARNING: dependency install failed; continuing with installed packages" >&2
+fi
+
 # ── run: MQTT -> InfluxDB bridge, restarted on crash ─────────────────────────
 while true; do
   echo "[bridge] starting"

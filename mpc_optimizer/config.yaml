@@ -1,6 +1,6 @@
 name: "MPC Optimizer + Dashboard"
 description: "Runs the joint MPC optimizer (15-min loop) and the web dashboard"
-version: "2.3.0"
+version: "2.4.0"
 slug: "mpc_optimizer"
 init: false
 
