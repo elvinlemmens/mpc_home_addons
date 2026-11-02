@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # COPYed in because the code is pulled at start, not at build).
 RUN pip install --no-cache-dir \
         influxdb-client pandas numpy scipy scikit-learn pvlib requests \
-        paho-mqtt linopy highspy pyarrow matplotlib fastapi uvicorn pyyaml
+        paho-mqtt linopy highspy pyarrow matplotlib fastapi uvicorn pyyaml pypdf
 
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
